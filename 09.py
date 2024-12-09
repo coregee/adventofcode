@@ -34,19 +34,20 @@ def part2(digits):
     while fill_index >= 0:
         if disk[fill_index][0] == None:
             fill_index -= 1
-        length = disk[fill_index][1]
-        # Find first gap from left
-        for i in range(fill_index):
-            if disk[i][0] == None and disk[i][1] >= length:
-                space = disk[i][1]
-                disk[i] = disk[fill_index]
-                disk[fill_index] = (None, length) # we don't need to worry about joining these
-                # If space is left over, add it in and adjust our pointer
-                if space > length:
-                    disk.insert(i + 1, (None, space - length))
-                    fill_index += 1
-                break
-        fill_index -= 1
+        else:
+            length = disk[fill_index][1]
+            # Find first gap from left
+            for i in range(fill_index):
+                if disk[i][0] == None and disk[i][1] >= length:
+                    space = disk[i][1]
+                    disk[i] = disk[fill_index]
+                    disk[fill_index] = (None, length) # we don't need to worry about joining these
+                    # If space is left over, add it in and adjust our pointer
+                    if space > length:
+                        disk.insert(i + 1, (None, space - length))
+                        fill_index += 1
+                    break
+            fill_index -= 1
     i = 0
     checksum = 0
     for data in disk:
